@@ -34,7 +34,6 @@ class V3021
         void disallowClockChange();
 
     private:
-        uint8_t _tempData;
         uint8_t _read(uint8_t adress);
         uint8_t _readData();
         uint8_t _readAdress(uint8_t adress);
