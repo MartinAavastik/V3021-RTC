@@ -23,7 +23,7 @@ void V3021::begin()
 {
     digitalWrite(_clkPin, HIGH);
     digitalWrite(_strPin, HIGH);
-    digitalWrite(_ioPin, LOW);
+    digitalWrite(_ioPin, HIGH);
 
     // the very first time after power loss while initlizing you must read 8 times.
     _readData();
