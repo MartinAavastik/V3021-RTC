@@ -1,0 +1,16 @@
+V3021	KEYWORD1
+begin	KEYWORD2
+readSeconds	KEYWORD2
+readMinutes	KEYWORD2
+readHours	KEYWORD2
+readDays	KEYWORD2
+readMonths	KEYWORD2
+readYears	KEYWORD2
+setSeconds	KEYWORD2
+setMinutes	KEYWORD2
+setHours	KEYWORD2
+setDays	KEYWORD2
+setMonths	KEYWORD2
+setYears	KEYWORD2
+allowClockChange	KEYWORD2
+disallowClockChange	KEYWORD2
