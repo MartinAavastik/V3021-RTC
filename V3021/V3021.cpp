@@ -25,8 +25,7 @@ void V3021::begin()
     digitalWrite(_strPin, HIGH);
     digitalWrite(_ioPin, LOW);
 
-    // first time initlizing you must read 8 times.
-    // This isnt required when you have battery connected.
+    // the very first time after power loss while initlizing you must read 8 times.
     _readData();
 
 }
@@ -66,6 +65,7 @@ uint8_t V3021::_readData()
 
 uint8_t V3021::_read(uint8_t adress)
 {
+    //internal read function, it takes adress adress from where to read.
     uint8_t _tempdata;
     // must write F so time updates to RAM.
     _writeAdress(0xF);
@@ -81,6 +81,7 @@ uint8_t V3021::_read(uint8_t adress)
 
 void V3021::_write(uint8_t adress, uint8_t data)
 {
+    // internal write, takes adress and data to write.
     uint8_t _tempdata;
     _tempdata = _decToBcd(data);
     _writeAdress(adress);
@@ -124,13 +125,13 @@ void V3021::_writeData(uint8_t data)
 
 uint8_t V3021::_bcdToDec(uint8_t data)
 {
-    // https://stackoverflow.com/questions/1408361/decimal-to-bcd-conversion
+    // source: https://stackoverflow.com/questions/1408361/decimal-to-bcd-conversion
     return ( (data/16)*10) + (data%16);
 }
 
 uint8_t V3021::_decToBcd(uint8_t data)
 {
-    // http://forum.arduino.cc/index.php?topic=57507.0
+    // same as previous
     return ( (data/10)*16) + (data%10);
 
 }
@@ -170,7 +171,7 @@ void V3021::setSeconds(uint8_t data)
     // write adress to RAM
     _write(0x2, data);
     // write RAM to internal clock which keeps time.
-    // only works when allowClockChange() is called.
+    // only works when allowClockChange() is previously called.
     _writeAdress(0xE);
 }
 
@@ -200,7 +201,7 @@ void V3021::setMonths(uint8_t data)
 
 void V3021::setYears(uint16_t data)
 {
-    // year should be in format of 2007, not 07.
+    // year should be in format of 2007, but the clock itself takes only 07.
     uint16_t _tempData = data - 2000;
     _write(0x7, _tempData);
     _writeAdress(0xE);
